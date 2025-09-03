@@ -1,25 +1,41 @@
 Personalized Financial Recommender
 
-A hybrid financial recommendation system demo built with Python and Streamlit, combining content-based filtering, collaborative filtering (SVD), and risk-adjusted recommendations. Generate personalized asset recommendations for users based on transaction history, asset characteristics, and risk profiles.
+Atplotlib is a hybrid financial recommendation system built in Python and Streamlit. It combines content-based filtering, collaborative filtering (SVD), and risk-adjusted recommendations to provide personalized asset suggestions for users based on transaction history, asset features, and risk profiles.
 
-Features
+🚀 Features
 
-User & Asset Simulation: Generates synthetic datasets of users, assets, and transactions.
+Synthetic Data Generation: Simulate users, assets, and transaction history.
 
-Content-Based Filtering: Computes user profiles and asset similarity using asset features.
+Content-Based Filtering: Compute user profiles using asset features like sector, volatility, and past returns.
 
-Collaborative Filtering (CF): Predicts user-asset ratings with SVD.
+Collaborative Filtering (SVD): Predict ratings for user-asset pairs using SVD.
 
-Hybrid Recommendations: Combines CF and content-based scores with risk alignment.
+Hybrid Recommendations: Combine CF and content-based scores for better personalization.
 
-Interactive Demo: Built with Streamlit for easy exploration.
+Risk Alignment: Adjust recommendations based on user risk tolerance and asset volatility.
 
-Installation
+Interactive Streamlit Demo: Explore recommendations through a user-friendly interface.
+
+🗂 Project Structure
+Recommenderfinancial/
+├── data/                   # Generated synthetic datasets
+├── src/
+│   ├── data_pipeline.py    # Data generation & loading
+│   ├── features.py         # Asset feature engineering
+│   ├── content_model.py    # Content-based scoring
+│   ├── cf_model.py         # Collaborative filtering (SVD)
+│   ├── hybrid.py           # Hybrid scoring and risk adjustment
+│   └── serve.py            # Main API for Streamlit app
+├── streamlit_app.py        # Streamlit front-end
+├── requirements.txt        # Python dependencies
+└── README.md
+
+⚡ Installation
 
 Clone the repository:
 
-git clone https://github.com/yourusername/atplotlib.git
-cd atplotlib
+git clone https://github.com/hthakral14/Recommenderfinancial.git
+cd Recommenderfinancial
 
 
 Create a virtual environment:
@@ -33,69 +49,36 @@ Install dependencies:
 
 pip install -r requirements.txt
 
-Usage
+🖥 Usage
 
-Run the Streamlit demo:
+Run the Streamlit app:
 
 streamlit run streamlit_app.py
 
 
-Select a user ID from the dropdown.
+Select a User ID from the dropdown.
 
-Click Get recommendations.
+Click Get Recommendations.
 
-View top asset recommendations with asset_id, ticker, sector, and score.
+View top asset recommendations with asset ID, ticker, sector, and score.
 
-Project Structure
-atplotlib/
-├── data/                   # Auto-generated synthetic datasets
-├── src/
-│   ├── data_pipeline.py    # Data generation and loading
-│   ├── features.py         # Asset feature engineering
-│   ├── content_model.py    # Content-based user profiles & scoring
-│   ├── cf_model.py         # Collaborative filtering model (SVD)
-│   ├── hybrid.py           # Hybrid scoring and risk adjustment
-│   └── serve.py            # Main API for Streamlit app
-├── streamlit_app.py        # Streamlit demo interface
-├── requirements.txt        # Python dependencies
-└── README.md
+🔧 How It Works
 
-How it Works
+Data Generation: Generates synthetic datasets for users, assets, and transactions.
 
-Data Generation
-Synthetic users, assets, and transaction history are generated if CSVs are not found.
+Feature Engineering: One-hot encodes categorical features (sector, market_cap) and standardizes numeric features (volatility, past_return).
 
-Feature Engineering
+Content-Based Filtering: Builds user profiles weighted by past transactions and calculates cosine similarity with assets.
 
-One-hot encode categorical features: sector, market_cap
+Collaborative Filtering: Trains an SVD model on user-asset ratings to predict missing ratings.
 
-Standardize numeric features: volatility, past_return
+Hybrid Recommendations: Combines normalized CF and content-based scores using a weight alpha=0.6.
 
-Content-Based Filtering
+Risk Alignment: Adjusts scores based on user risk tolerance vs asset volatility.
 
-Build user profiles as weighted averages of asset features based on transaction ratings or amounts
+Recommendation Output: Returns top-K recommended assets for a user with scores.
 
-Compute cosine similarity between users and assets
-
-Collaborative Filtering (SVD)
-
-Train SVD model on user-asset ratings
-
-Predict missing ratings
-
-Hybrid Scoring
-
-Normalize content and CF matrices
-
-Combine scores with alpha weight (default 0.6)
-
-Apply risk alignment: adjusts scores based on user risk tolerance vs asset volatility
-
-Recommendation Output
-
-Returns top-K recommended assets for a user with scores for ranking
-
-Dependencies
+📦 Dependencies
 
 Python 3.8+
 
@@ -105,26 +88,24 @@ numpy
 
 scikit-learn
 
-surprise
+scikit-surprise
 
 streamlit
 
-Install all with:
+Install all dependencies:
 
 pip install pandas numpy scikit-learn scikit-surprise streamlit
 
-Example
+📈 Future Improvements
 
-Future Improvements
-
-Real financial datasets integration
+Integrate real financial datasets
 
 Add time-series forecasting for returns
 
-Improve risk modeling with portfolio constraints
-
 Optimize CF predictions for large datasets
 
-License
+Enhance risk modeling with portfolio constraints
+
+📄 License
 
 MIT License © 2025
